@@ -15,7 +15,17 @@
     <% } %>
     <h4><%= furniture.price %> BHD</h4>
      <a href="/furnitures/<%= furniture._id %>">View details</a>
+     <form action="/moodboards/<%= userBoards[0]?._id %>/add" method="POST">
+      <!-- better: render a dropdown of user's boards -->
+      <select name="boardId">
+        <% userBoards.forEach(b => { %>
+          <option value="<%= b._id %>"><%= b.title %></option>
+        <% }) %>
+      </select>
+      <input type="hidden" name="furnitureId" value="<%= furniture._id %>">
+      <button type="submit">Add to board</button>
+    </form>
   <% }) %>
-  <a href="/furnitures/new">Add new furniture</a>
+
 </body>
 </html>

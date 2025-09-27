@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Furniture</title>
+</head>
+<body>
+      <%- include('../partials/_navbar.ejs') %>
+<h1>My Furniture</h1>
+ <% myFurniture.forEach((furniture)=> { %>
+<h1><%= furniture.name %></h1>
+     <% if (furniture.image) { %>
+      <img src="<%= furniture.image %>" style="max-width:200px;">
+    <% } %>
+    <h4>Category: <%=furniture.category %></h4>
+    <h4><%=furniture.price %> BHD</h4>
+    <h4><%=furniture.description %></h4>
+     <a href="/furnitures/<%= furniture._id %>/edit">Edit Furniture</a>
+
+     <form
+            action="/furnitures/<%= furniture._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button type="submit">Delete Furniture</button>
+          </form>
+      <% }) %>
+      <a href="/furnitures/new">Add new furniture</a>
+
+    </body>
+</html>

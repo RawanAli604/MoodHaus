@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+</head>
+<body>
+      <%- include('../partials/_navbar.ejs') %>
+<h1><%= board.title %></h1>
+<p><%= board.description %></p>
+
+<h2>Items</h2>
+<% board.furnitures.forEach(item => { %>
+  <div>
+    <h4><%= item.name %></h4>
+    <img src="<%= item.image %>" style="max-width:150px;">
+    <form action="/moodboards/<%= board._id %>/remove" method="POST">
+      <input type="hidden" name="furnitureId" value="<%= item._id %>">
+      <button type="submit">Remove</button>
+    </form>
+  </div>
+<% }) %>      
+</body>
+</html>

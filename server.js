@@ -16,6 +16,8 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 // Controllers
 const authController = require('./controllers/auth.js');
 const furnitureController = require('./controllers/furniture.js');
+const usersController = require('./controllers/users.js');
+const moodBoardController = require('./controllers/moodBoard');
 
 // Set the port from environment variable or default to 3000
 const PORT = process.env.PORT ? process.env.PORT : '3000';
@@ -57,6 +59,8 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authController);
 app.use('/furnitures', isSignedIn, furnitureController);
+app.use('/users', isSignedIn, usersController);
+app.use('/moodboards', isSignedIn, moodBoardController);
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}!`);

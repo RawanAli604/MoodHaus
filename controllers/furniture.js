@@ -3,12 +3,19 @@ const router = express.Router();
 const upload = require('../middleware/upload'); 
 
 const Furniture = require('../models/furniture');
+const MoodBoard = require('../models/moodBoard'); // import the model
 
 router.get('/', async (req, res) => {
     try{
     const populatedFurnitures = await Furniture.find({}).populate('owner');
+
+    let userBoards = [];
+    if (req.session.user) {
+      userBoards = await MoodBoard.find({ owner: req.session.user._id });
+    }
        res.render("furnitures/index.ejs", {
         furnitures: populatedFurnitures,
+        userBoards: userBoards,
        });
     }catch(error){
         console.log(error);
