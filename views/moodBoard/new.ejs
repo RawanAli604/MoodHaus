@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <%- include('../partials/_navbar.ejs') %>
+
+<h1>Create a New Moodboard</h1>
+
+<form action="/moodboards" method="POST">
+  <div>
+    <label>Title<br>
+      <input type="text" name="title" required maxlength="120" placeholder="e.g. Cozy Living Room">
+    </label>
+  </div>
+
+  <div>
+    <label>Description (optional)<br>
+      <textarea name="description" rows="4" cols="40" placeholder="Short description"></textarea>
+    </label>
+  </div>
+
+  <div style="margin-top:8px;">
+    <button type="submit">Create Moodboard</button>
+    <a href="/moodboards" style="margin-left:8px;">Cancel</a>
+  </div>
+</form>
+
+</body>
+</html>

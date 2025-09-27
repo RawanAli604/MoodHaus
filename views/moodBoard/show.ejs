@@ -7,19 +7,61 @@
 </head>
 <body>
       <%- include('../partials/_navbar.ejs') %>
-<h1><%= board.title %></h1>
-<p><%= board.description %></p>
 
-<h2>Items</h2>
-<% board.furnitures.forEach(item => { %>
-  <div>
-    <h4><%= item.name %></h4>
-    <img src="<%= item.image %>" style="max-width:150px;">
-    <form action="/moodboards/<%= board._id %>/remove" method="POST">
-      <input type="hidden" name="furnitureId" value="<%= item._id %>">
-      <button type="submit">Remove</button>
-    </form>
+<% if (!board) { %>
+  <p>Board not found.</p>
+<% } else { %>
+
+  <h1><%= board.title %></h1>
+  <% if (board.description) { %><p><%= board.description %></p><% } %>
+
+  <div style="margin-top:12px;">
+    <a href="/moodboards/<%= board._id %>/edit">Edit Board</a>
+    <a href="/moodboards" style="margin-left:8px;">Back to boards</a>
   </div>
-<% }) %>      
+
+  <hr>
+
+  <h2>Items</h2>
+
+  <% if (!board.furnitures || board.furnitures.length === 0) { %>
+    <p>No items added yet.</p>
+  <% } else { %>
+    <div style="display:flex; flex-wrap:wrap; gap:12px;">
+      <% board.furnitures.forEach(item => { %>
+        <div>
+          <% if (item.image) { %>
+            <img src="<%= item.image %>" alt="<%= item.name %>" style="max-width:200px; height:auto;">
+          <% } %>
+
+          <h4><a href="/furnitures/<%= item._id %>">View <%= item.name %></a></h4>
+          <form action="/moodboards/<%= board._id %>/remove" method="POST" style="margin-top:6px;">
+            <input type="hidden" name="furnitureId" value="<%= item._id %>">
+            <button type="submit">Remove</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <hr>
+
+  <h3>Add an item</h3>
+  <% /* If the controller passes allFurnitures, show a select. Otherwise link to catalog. */ %>
+  <% if (typeof allFurnitures !== 'undefined' && Array.isArray(allFurnitures) && allFurnitures.length > 0) { %>
+    <form action="/moodboards/<%= board._id %>/add" method="POST">
+      <select name="furnitureId" required>
+        <option value="" disabled selected>Select an item</option>
+        <% allFurnitures.forEach(f => { %>
+          <option value="<%= f._id %>"><%= f.name %> <% if (f.price) { %> - <%= f.price %> BHD <% } %></option>
+        <% }) %>
+      </select>
+      <button type="submit" style="margin-left:8px;">Add</button>
+    </form>
+  <% } else { %>
+    <p><a href="/furnitures">Browse catalog</a> to add items to this board.</p>
+  <% } %>
+
+<% } %>
 </body>
 </html>

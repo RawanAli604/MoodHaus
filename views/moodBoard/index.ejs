@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <%- include('../partials/_navbar.ejs') %>
+
+<h1>My Moodboards</h1>
+
+<p><a href="/moodboards/new">+ Create new moodboard</a></p>
+
+<% if (!boards || boards.length === 0) { %>
+  <p>You have no moodboards yet. Create one to get started.</p>
+<% } else { %>
+  <ul>
+    <% boards.forEach(board => { %>
+      <li style="margin-bottom:12px;">
+        <h3><%= board.title %></h3>
+        <% if (board.description) { %><p><%= board.description %></p><% } %>
+        <small>Created: <%= new Date(board.createdAt).toLocaleString() %></small>
+        <div style="margin-top:6px;">
+          <a href="/moodboards/<%= board._id %>/edit">Edit</a>
+          <form action="/moodboards/<%= board._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit" onclick="return confirm('Delete this board?')">Delete</button>
+          </form>
+          <a href="/moodboards/<%= board._id %>">Open</a>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+</body>
+</html>
