@@ -14,5 +14,16 @@
     <h4>Category: <%=furniture.category %></h4>
     <h4><%=furniture.price %> BHD</h4>
     <h4><%=furniture.description %></h4>
+    <% if (furniture.owner._id.equals(user._id)) { %>
+     <p>Owned by YOU</p>
+     <form
+            action="/furnitures/<%= furniture._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button type="submit">Delete Furniture</button>
+          </form>
+        <% } else { %>
+        <p>Owned by <%= listing.owner.username %></p>
+        <% } %>
 </body>
 </html>

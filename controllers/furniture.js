@@ -50,4 +50,18 @@ res.render("furnitures/show.ejs",{
 }
 });
 
+router.delete('/:furnitureId', async (req, res) => {
+try{
+const furniture = await Furniture.findById(req.params.furnitureId);
+if(furniture.owner.equals(req.session.user._id)){
+    await Furniture.deleteOne();
+    res.redirect('/furnitures');
+} else {
+     res.send(`Permession denied, you're not authorized to do that!`);
+}
+} catch(error){
+    console.log(error);
+    res.redirect('/');
+}
+});
 module.exports = router;
