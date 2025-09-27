@@ -16,6 +16,8 @@
     <h4><%=furniture.description %></h4>
     <% if (furniture.owner._id.equals(user._id)) { %>
      <p>Owned by YOU</p>
+     <a href="/furnitures/<%= furniture._id %>/edit">Edit Furniture</a>
+
      <form
             action="/furnitures/<%= furniture._id %>?_method=DELETE"
             method="POST"

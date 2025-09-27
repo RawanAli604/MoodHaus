@@ -64,4 +64,38 @@ if(furniture.owner.equals(req.session.user._id)){
     res.redirect('/');
 }
 });
+
+router.get('/:furnitureId/edit', async (req, res) => {
+    try {
+       const currentFurniture = await Furniture.findById(req.params.furnitureId);
+       res.render('furnitures/edit.ejs', {
+        furniture : currentFurniture,
+       });
+    } catch(error){
+        console.log(error);
+        res.redirect('/');
+    }
+});
+
+router.put('/:furnitureId', upload.single('image'), async (req, res) => {
+try {
+    const currentFurniture = await Furniture.findById(req.params.furnitureId);
+    if(currentFurniture.owner.equals(req.session.user._id)){
+      await currentFurniture.updateOne({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      owner: req.session.user._id,
+      image: req.file ? '/uploads/' + req.file.filename : null});
+      res.redirect('/furnitures');
+    } else {
+            res.send(`You don't have permession to do that.`);
+    }
+} catch (error) {
+    console.log(error);
+    res.redirect('/');
+}
+});
+
 module.exports = router;

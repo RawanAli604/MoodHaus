@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Furniture</title>
+</head>
+<body>
+      <%- include('../partials/_navbar.ejs') %>
+<h1>Edit <%=furniture.name %></h1>
+<form action="/furnitures/<%= furniture._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name"  value="<%= furniture.name %>"/>
+     <label for="description">Description:</label>
+    <textarea type="text" name="description" id="description" rows="4" ><%= furniture.description %></textarea>
+     <label for="category">Category:</label>
+    <input type="text" name="category" id="category" value="<%= furniture.category %>"/>
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" min="0" value="<%= furniture.price %>"/>
+    <% if (furniture.image) { %>
+    <p>Current image:</p>
+    <img src="<%= furniture.image %>" style="max-width:200px;"><br>
+  <% } %>
+
+  <label for="image">Change image: </label>
+  <input type="file" name="image" accept="image/*" />
+  <button type="submit">Update Furniture</button>
+</form>
+</body>
+</html>
