@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Catalog</title>
+</head>
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1> Furniture Catalog </h1>
+        <a href="/furnitures/new">+ Add Furniture</a>
+   <% furnitures.forEach((furniture)=> { %>
+        <h4><%=furniture.name %> , <%= furniture.price %></h4>
+                <h5><%=furniture.description %></h5>
+                 <% if (furniture.image) { %>
+      <img src="<%= furniture.image %>" style="max-width:200px;">
+    <% } %>
+        <p>Owned by <%= furniture.owner.username%></p>
+  <% }) %>
+</body>
+</html>

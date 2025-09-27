@@ -8,11 +8,11 @@ const app = express();
 
 const methodOverride = require('method-override');
 const morgan = require('morgan');
+const multer = require('multer');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
-
 // Controllers
 const authController = require('./controllers/auth.js');
 const furnitureController = require('./controllers/furniture.js');
@@ -20,6 +20,9 @@ const furnitureController = require('./controllers/furniture.js');
 // Set the port from environment variable or default to 3000
 const PORT = process.env.PORT ? process.env.PORT : '3000';
 const path = require('path');
+const fs = require('fs');
+const upload = require('./middleware/upload.js');
+
 // MIDDLEWARE
 //
 // Middleware to parse URL-encoded data from forms
@@ -29,6 +32,7 @@ app.use(methodOverride('_method'));
 // Morgan for logging HTTP requests
 app.use(morgan('dev'));
 
+app.use('/uploads', express.static('uploads'));
 // Session Storage with MongoStore
 app.use(
   session({
@@ -46,11 +50,13 @@ app.use(passUserToView);
 
 // PUBLIC
 app.get('/', (req, res) => {
-  res.render('index.ejs');
+  res.render('index.ejs', {
+    user: req.session.user,
+  });
 });
 
 app.use('/auth', authController);
-app.use('./furnitures', isSignedIn, furnitureController);
+app.use('/furnitures', isSignedIn, furnitureController);
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}!`);

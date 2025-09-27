@@ -9,6 +9,7 @@
 <% if (user) { %>
   <%- include('./partials/_navbar.ejs') %>
 <h1>Welcome to MoodHaus, <%= user.username %>!</h1>
+<a href="/furnitures/index.ejs">Catalog</a>
 <% } else { %>
 <h1>Welcome to the app, guest.</h1>
 <p>

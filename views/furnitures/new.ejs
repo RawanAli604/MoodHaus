@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add new furniture</title>
+</head>
+<body>
+      <%- include('../partials/_navbar.ejs') %>
+<h1>New Furniture</h1>
+<form action="/furnitures" method="POST" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required/>
+     <label for="description">Description:</label>
+    <textarea type="text" name="description" id="description" rows="4"></textarea>
+     <label for="category">Category:</label>
+    <input type="text" name="category" id="category" required/>
+    <label for="price">Price:</label>
+    <input type="number" name="price" id="price" min="0" required/>
+     <label for="image">Image:</label>
+    <input type="file" name="image" id="image" accept="image/*" required/>
+    <button type="submit">Add Furniture</button>
+</form>
+</body>
+</html>

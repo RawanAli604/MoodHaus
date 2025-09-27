@@ -18,14 +18,13 @@ const furnitureSchema = new mongoose.Schema({
      required: true,
     },
     image: {
-     data: Buffer, 
-     contentType: String 
-    },
+     type: String, 
+       },
     owner: {
-type: mongoose.Schema.Types.ObjectId,
-ref:'User'
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'User'
     },
 });
 
-const furniture = mongoose.model('furniture', furnitureSchema);
-module.exports = furniture;
+const Furniture = mongoose.model('Furniture', furnitureSchema);
+module.exports = Furniture;
