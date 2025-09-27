@@ -34,8 +34,20 @@ router.post('/', upload.single('image'), async (req, res) => {
     res.redirect('/furnitures');
     } catch(error){
         console.log(error);
-        res.redirect('/');
+        res.redirect('/furnitures');
     }
+});
+
+router.get('/:furnitureId', async (req, res) => {
+try{
+    const populatedFurnitures = await Furniture.findById(req.params.furnitureId).populate('owner');
+res.render("furnitures/show.ejs",{
+    furniture: populatedFurnitures,
+});
+} catch(error){
+    console.log(error);
+    res.redirect('/');
+}
 });
 
 module.exports = router;

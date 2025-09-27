@@ -8,14 +8,14 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1> Furniture Catalog </h1>
-        <a href="/furnitures/new">+ Add Furniture</a>
    <% furnitures.forEach((furniture)=> { %>
-        <h4><%=furniture.name %> , <%= furniture.price %></h4>
-                <h5><%=furniture.description %></h5>
+        <h4><%=furniture.name %></h4>
                  <% if (furniture.image) { %>
       <img src="<%= furniture.image %>" style="max-width:200px;">
     <% } %>
-        <p>Owned by <%= furniture.owner.username%></p>
+    <h4><%= furniture.price %> BHD</h4>
+     <a href="/furnitures/<%= furniture._id %>">View details</a>
   <% }) %>
+  <a href="/furnitures/new">Add new furniture</a>
 </body>
 </html>
