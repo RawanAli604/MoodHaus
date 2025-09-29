@@ -1,0 +1,446 @@
+/* Hero page styles for MoodHaus look */
+:root{
+  --accent-beige: #EDE2D6; /* light beige text */
+  --muted-beige: rgba(237,226,214,0.9);
+  --white-faded: rgba(255,255,255,0.95);
+  --overlay-dark: rgba(18,18,20,0.55);
+  --overlay-left: rgba(34,34,34,0.0);
+  --content-left-padding: 64px;
+}
+
+/* Reset basics */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--white-faded);
+  background: #111; /* fallback */
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Full-screen hero container */
+.first{
+  height:100vh;
+  width:100%;
+  position:relative;
+  display:flex;
+  align-items:center; /* center vertically */
+  justify-content:flex-start; /* content on left */
+  overflow:hidden;
+  /* Replace the URL below with your uploaded image path */
+  background-image:
+    url('https://i.imgur.com/S0ec9jx.jpeg');
+  background-size:cover;
+  background-position: right center; /* furniture sits towards the right */
+  background-repeat:no-repeat;
+}
+
+/* optional darker overlay to give moody look */
+.first::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  /* subtle left-to-right gradient to keep left text readable */
+  pointer-events:none;
+}
+
+/* Generic main inside hero */
+main{
+  position:relative;
+  z-index:2;
+  width:100%;
+}
+
+/* Content block placed on the left with spacing similar to the picture */
+.Notauthorized, .authorized{
+  max-width:560px;
+  margin-left: var(--content-left-padding);
+  /* push content slightly down to approximate vertical position from the image */
+  margin-top:4.5rem;
+  transform: translateY(0);
+  color:var(--muted-beige);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+}
+
+/* Big site title — mimics the elegant thin Playfair look */
+.Notauthorized h1,
+.authorized h1{
+  font-family: "Cinzel Decorative", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size:96px;            /* tune to taste */
+  line-height:0.9;
+  margin-bottom:10px;
+  letter-spacing:6px;
+  color: #2E2929;            /* warm off-white */
+  text-transform: none;
+  margin-top:0;
+  margin-bottom:8px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Subheading paragraph */
+.Notauthorized h3,
+.authorized h3{
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight:300;
+  font-size:20px;
+  line-height:1.6;
+  color:#beb0a3;
+  max-width:520px;
+  margin-bottom:30px;
+  text-transform: capitalize;
+  letter-spacing:0.6px;
+  /* padding-left: 45%; */
+}
+
+/* Action links (for authorized user) */
+.actions{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+/* Link style used for CTA inside .authorized */
+.actions a{
+  display:inline-block;
+  padding:12px 18px;
+  border-radius:6px;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: var(--white-faded);
+  backdrop-filter: blur(4px);
+  transition: all .25s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+.actions a:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+}
+
+/* Buttons used in unauthorized block */
+.btn{
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight:300;
+  font-size: 25px;
+  margin-right:70px;
+  border-radius:6px;
+  overflow:hidden;
+  border: none;
+  background: transparent;
+}
+.btn a{
+  display:inline-block;
+  text-decoration:none;
+  padding:12px 22px;
+  font-weight:600;
+  letter-spacing:0.8px;
+  color: var(--white-faded);
+  /* border:2px solid rgba(255,255,255,0.9); */
+  border-radius:6px;
+  background: transparent;
+  transition: all .22s ease;
+}
+.btn a:hover{
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-3px);
+}
+
+/* If you want the "SIGN IN / SIGN UP" smaller links under title (like the picture) */
+.Notauthorized .secondary-links{
+  margin-top:18px;
+  display:flex;
+  gap:24px;
+  font-weight:600;
+  color:var(--muted-beige);
+  letter-spacing:1px;
+}
+.Notauthorized .secondary-links a{
+  color:var(--muted-beige);
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.Notauthorized .secondary-links a:hover{
+  color:var(--white-faded);
+}
+
+/* If you include a partial navbar, keep it above content */
+nav{
+  position:absolute;
+  top:18px;
+  left:var(--content-left-padding);
+  z-index:3;
+}
+
+/* Responsive tweaks */
+@media (max-width:1000px){
+  .first{
+    background-position: center;
+  }
+  .Notauthorized h1,
+  .authorized h1{
+    font-size:72px;
+    letter-spacing:4px;
+  }
+  .Notauthorized, .authorized{
+    margin-left:36px;
+    margin-top:2.5rem;
+  }
+}
+@media (max-width:680px){
+  .first{
+    align-items:flex-start;
+    padding-top:40px;
+    background-position: center 30%;
+  }
+  .Notauthorized h1,
+  .authorized h1{
+    font-size:44px;
+    letter-spacing:2px;
+  }
+  .Notauthorized h3, .authorized h3{
+    font-size:15px;
+    max-width:100%;
+  }
+  .Notauthorized, .authorized{
+    margin-left:18px;
+    margin-top:2rem;
+    max-width:calc(100% - 40px);
+  }
+  .actions, .secondary-links{
+    flex-direction:column;
+    gap:12px;
+  }
+  .btn a{padding:10px 14px}
+}
+
+.icon {
+    width: 90px;
+}
+.full {
+    display: flex;
+    flex-direction: row;
+      padding-left: 40%;
+}
+/* MoodHaus — Elegant responsive Sign In (Cinzel / Cinzel Decorative) */
+
+/* ---------- THEME COLORS ---------- */
+:root{
+  --bg-1: #FBF6F2;          /* very warm cream (top) */
+  --bg-2: #FAEDE6;          /* warm mid tone */
+  --accent-strong: #FAE5D6; /* palette main */
+  --accent-muted: #EDE2D6;  /* muted warm text */
+  --card-bg: rgba(255,255,255,0.72); /* soft translucent card */
+  --card-border: rgba(250,229,214,0.38);
+  --glass-shadow: 0 10px 30px rgba(14,12,10,0.08);
+  --focus-glow: rgba(250,229,214,0.26);
+  --text-dark: #151313;
+  --radius: 18px;
+}
+
+/* ---------- RESET ---------- */
+html,body{height:100%}
+.signin {
+  font-family: "Cinzel", serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  color:var(--text-dark);
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(250,229,214,0.35), transparent 10%),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  min-height:100vh;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  padding:36px;
+}
+
+/* ---------- PAGE TITLES (keeps consistency with welcome) ---------- */
+.site-title{
+  position: absolute;
+  left:36px;
+  top:18px;
+  font-family: "Cinzel Decorative", cursive;
+  color: var(--accent-strong);
+  font-size: clamp(18px, 2.2vw, 28px);
+  letter-spacing: 1.6px;
+  font-weight:400;
+}
+.site-sub{
+  position:absolute;
+  left:36px;
+  top:56px;
+  font-family: "Cinzel", serif;
+  color: var(--accent-muted);
+  font-size: clamp(11px, 1.2vw, 14px);
+  max-width: 520px;
+}
+
+/* ---------- CENTERING CONTAINER ---------- */
+.container{
+  width:100%;
+  max-width:540px;
+  margin: auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 16px;
+}
+
+/* ---------- GLASS CARD ---------- */
+.card{
+  width:100%;
+  height:400px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--card-border);
+  padding: clamp(20px, 3.2vw, 34px);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  color: var(--text-dark);
+  display:block;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+/* header inside card (brand & login label) */
+.card .login{
+  display:block;
+  font-family: "Cinzel", serif;
+  font-weight:700;
+  text-align: center;
+  color: var(--text-dark);
+  font-size: clamp(18px, 2.4vw, 22px);
+  margin-bottom: 12px;
+  letter-spacing: .6px;
+}
+
+/* ---------- FORM LAYOUT ---------- */
+form{
+  margin-top: 16%;
+  display:grid;
+  gap: 40px;
+}
+
+/* wrapper for each input */
+.inputBox{
+  position:relative;
+}
+
+/* input base */
+.inputBox input{
+  width:100%;
+  background: transparent;
+  border-radius: 12px;
+  border: 1px solid rgba(21,19,19,0.06);
+  padding: 16px 14px;
+  padding-top: 22px; /* room for label inside */
+  font-family: "Cinzel", serif;
+  font-size: clamp(14px, 1.6vw, 16px);
+  color: var(--text-dark);
+  outline:none;
+  transition: box-shadow .16s ease, border-color .16s ease, transform .12s ease;
+  caret-color: var(--text-dark);
+}
+
+/* focus style */
+.inputBox input:focus{
+  box-shadow: 0 12px 30px var(--focus-glow);
+  border-color: rgba(21,19,19,0.12);
+  transform: translateY(-1px);
+}
+
+/* label that starts inside the field */
+.inputBox label{
+  position:absolute;
+  left:14px;
+  top:12px;
+  transform-origin:left top;
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), top .18s ease, font-size .18s ease, #5d3b3b .18s ease;
+  color: rgba(21,19,19,0.55);
+  pointer-events:none;
+  font-family: "Cinzel", serif;
+  font-size: clamp(13px, 1.2vw, 15px);
+  padding: 0 6px;
+  background: transparent;
+}
+
+/* When input focused OR not empty OR JS-class has-value => float the label */
+.inputBox input:focus + label,
+.inputBox input:not(:placeholder-shown) + label,
+.inputBox input.has-value + label{
+  transform: translateY(-6px) scale(.86);
+  top: -15px;
+  color: var(#5d3b3b);
+  font-weight:700;
+  letter-spacing: .4px;
+  font-size: clamp(16px, 1.0vw, 13px);
+  background: transparent;
+}
+
+/* slight underline accent when floated (optional decorative) */
+.inputBox input:focus + label::after,
+.inputBox input.has-value + label::after{
+  content:"";
+  display:inline-block;
+  width:38px;
+  height:2px;
+  margin-left:10px;
+  color: linear-gradient(90deg, var(#5d3b3b), rgba(239,230,222,0.5));
+  vertical-align:middle;
+  border-radius:2px;
+  opacity:.95;
+}
+
+/* ---------- BUTTON ---------- */
+.button{
+  display:inline-block;
+  width:100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  font-family: "Cinzel", serif;
+  font-weight:700;
+  font-size: clamp(15px, 1.6vw, 16px);
+  background: linear-gradient(180deg, rgba(92, 75, 64, 0.5), rgba(250,229,214,0.85));
+  color: #3b2f2a;
+  cursor:pointer;
+  transition: transform .14s ease, box-shadow .14s ease, opacity .12s ease;
+  box-shadow: 0 8px 24px rgba(48,33,27,0.08);
+}
+.button:active{ transform: translateY(1px); }
+.button:hover{ transform: translateY(-3px); opacity:.98; }
+
+/* ---------- RESPONSIVE: tablet & small screens ---------- */
+@media (max-width: 900px){
+  .container{ max-width:460px; padding: 16px; }
+  .card{ padding: clamp(18px, 4vw, 28px); }
+  .site-title{ left:20px; top:14px; }
+  .site-sub{ left:20px; top:50px; max-width:360px; }
+}
+
+@media (max-width: 520px){
+  body{ padding:18px; align-items:flex-start; }
+  .container{ max-width:420px; }
+  .site-title{ left:14px; top:12px; font-size:18px; }
+  .site-sub{ left:14px; top:42px; font-size:12px; width: calc(100% - 28px); }
+  .card{ margin-top: 64px; border-radius:12px; padding:18px; }
+  .inputBox input{ padding:14px 12px; padding-top:20px; font-size:15px; }
+  .inputBox label{ left:12px; top:10px; }
+  .button{ padding:11px 12px; font-size:15px; border-radius:10px; }
+}
+
+/* make sure long text wraps nicely */
+.card, .site-sub { word-break: break-word; }
+
+/* ---------- ACCESSIBILITY ---------- */
+/* increase hit area for inputs on small screens */
+.inputBox input{ min-height:50px; }
+
+/* ensure label remains visible when using keyboard only */
+.inputBox input:focus + label{ text-shadow: 0 1px 0 rgba(255,255,255,0.02); }

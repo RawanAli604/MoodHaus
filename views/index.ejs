@@ -3,15 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400..900&display=swap" rel="stylesheet">  <title>Home Page</title>
 </head>
 <body>
-    <%- include('./partials/_navbar.ejs') %>
+  <div class="first">
+<main>
 <% if (user) { %>
-<h1>Welcome to MoodHaus, <%= user.username %>!</h1>
-<% } else { %>
-<h1>Welcome to MoodHaus, guest.</h1>
-<% } %>
+  <%- include('./partials/_navbar.ejs') %>
+<div class="authorized">
+<h1>Hey, <%= user.username %> !</h1>
+<h3>Visualize your interior ideas. Build custom moodboards with curated furniture pieces</h3>
 
+
+<div class="actions">
+<a href="/furnitures">Explore Furniture Catalog</a>
+<a href="/moodboards">Create a Moodboard</a>
+</div>
+</div>
+<% } else { %>
+<div class="Notauthorized">
+  <div class="full">
+  <img class="icon" src="https://i.imgur.com/gV3qqhN.png" width:20px />
+<h1>MoodHaus</h1>
+</div>
+<h3>Visualize your interior ideas. Build custom moodboards with curated furniture pieces</h3>
+
+
+<button class="btn">
+  <a href="/auth/sign-up">Sign-Up</a>
+</button>
+<button class="btn">
+  <a href="/auth/sign-in">Sign-In</a>
+</button>
+</div>
+<% } %>
+</main>
+</div>
 </body>
 </html>

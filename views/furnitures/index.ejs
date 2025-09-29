@@ -8,13 +8,14 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1> Furniture Catalog </h1>
+    <h3>Discover high-quality, curated furniture pieces and save your selections to moodboards for easy planning and visualization</h3>
    <% furnitures.forEach((furniture)=> { %>
         <h4><%=furniture.name %></h4>
                  <% if (furniture.image) { %>
       <img src="<%= furniture.image %>" style="max-width:200px;">
-    <% } %>
+    <% } %>4
     <h4><%= furniture.price %> BHD</h4>
-     <a href="/furnitures/<%= furniture._id %>">View details</a>
+     <button type="submit"><a href="/furnitures/<%= furniture._id %>">View Details</a></button>
      <form action="/moodboards/<%= userBoards[0]?._id %>/add" method="POST">
       <!-- better: render a dropdown of user's boards -->
       <select name="boardId">
@@ -23,7 +24,7 @@
         <% }) %>
       </select>
       <input type="hidden" name="furnitureId" value="<%= furniture._id %>">
-      <button type="submit">Add to board</button>
+      <button type="submit">Add to Board</button>
     </form>
   <% }) %>
 

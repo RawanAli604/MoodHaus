@@ -36,6 +36,8 @@ app.use(morgan('dev'));
 
 app.use('/uploads', express.static('uploads'));
 // Session Storage with MongoStore
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
