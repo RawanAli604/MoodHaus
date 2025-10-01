@@ -10,59 +10,52 @@
 <body>
   <%- include('../partials/_navbar.ejs') %>
 
-  <div class="furniture-show">
+  <div class="edit-wrapper">
 
-    <!-- Page header -->
-    <div class="page-head">
-      <div class="page-title">Edit Furniture</div>
-      <div class="page-sub">Update your design — change details or replace the image</div>
-    </div>
-
-    <div class="edit-card">
-      <div class="edit-content">
-
-        <!-- Form fields -->
-        <div class="input-group">
-          <label for="name">Name:</label>
-          <input type="text" name="name" id="name" value="<%= furniture.name %>" />
-        </div>
-
-        <div class="input-group">
-          <label for="description">Description:</label>
-          <textarea name="description" id="description" rows="4"><%= furniture.description %></textarea>
-        </div>
-
-        <div class="input-group">
-          <label for="category">Category:</label>
-          <input type="text" name="category" id="category" value="<%= furniture.category %>" />
-        </div>
-
-        <div class="input-group">
-          <label for="price">Price (BHD):</label>
-          <input type="number" name="price" id="price" min="0" value="<%= furniture.price %>" />
-        </div>
-
-        <% if (furniture.image) { %>
-        <div class="current-image">
-          <p>Current Image:</p>
-          <div class="img-wrapper">
-            <img src="<%= furniture.image %>" alt="<%= furniture.name %>"/>
-          </div>
-        </div>
-        <% } %>
-
-        <div class="input-group">
-          <label for="image">Change Image:</label>
-          <input type="file" name="image" accept="image/*" />
-        </div>
-
-        <div class="submit-wrap">
-          <button type="submit" class="btn-primary">Update Furniture</button>
-        </div>
-
-      </div>
-    </div>
-
+  <div class="edit-head">
+    <h1>Edit <%= furniture.name %></h1>
   </div>
+
+  <form action="/furnitures/<%= furniture._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="edit-form">
+
+    <div class="input-box">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="<%= furniture.name %>" required>
+    </div>
+
+    <div class="input-box">
+      <label for="description">Description</label>
+      <textarea name="description" id="description" rows="4" required><%= furniture.description %></textarea>
+    </div>
+
+    <div class="input-box">
+      <label for="category">Category</label>
+      <input type="text" name="category" id="category" value="<%= furniture.category %>" required>
+    </div>
+
+    <div class="input-box">
+      <label for="price">Price</label>
+      <input type="number" name="price" id="price" min="0" value="<%= furniture.price %>" required>
+    </div>
+
+    <% if (furniture.image) { %>
+      <div class="current-image">
+        <p>Current Image:</p>
+        <div class="img-wrapper hover-zoom">
+          <img src="<%= furniture.image %>" alt="<%= furniture.name %>">
+          <div class="overlay">Current</div>
+        </div>
+      </div>
+    <% } %>
+
+    <div class="input-box file-input-box">
+      <label for="image" class="file-label">Change Image</label>
+      <input type="file" name="image" id="image" accept="image/*">
+    </div>
+
+    <button type="submit" class="btn-primary submit-btn">Update Furniture</button>
+    
+  </form>
+</div>
 </body>
 </html>
