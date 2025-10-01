@@ -3,29 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>My Furniture</title>
 </head>
 <body>
-      <%- include('../partials/_navbar.ejs') %>
-<h1>My Furniture</h1>
- <% myFurniture.forEach((furniture)=> { %>
-<h1><%= furniture.name %></h1>
-     <% if (furniture.image) { %>
-      <img src="<%= furniture.image %>" style="max-width:200px;">
+     <%- include('../partials/_navbar.ejs') %>
+
+  <div class="furniture-show">
+
+
+    <!-- Page header (div-only) -->
+    <div class="page-head">
+      <div class="page-title">My Furniture</div>
+      <div class="page-sub">Manage your posted pieces — edit details, remove items, or add new designs</div>
+    </div>
+
+    <!-- If no furniture -->
+    <% if (!myFurniture || myFurniture.length === 0) { %>
+      <div class="empty-state">
+        <div class="empty-title">No furniture yet</div>
+        <div class="empty-sub">Click below to add your first piece to MoodHaus</div>
+        <div class="empty-cta">
+          <a class="btn-primary" href="/furnitures/new">Add new furniture</a>
+        </div>
+      </div>
+    <% } else { %>
+
+      <!-- Grid of cards -->
+      <div class="myfurniture-wrapper">
+        <div class="furniture-grid">
+          <% myFurniture.forEach(function(furniture){ %>
+
+            <!-- single card -->
+            <div class="furniture-card" aria-labelledby="f-title-<%= furniture._id %>">
+
+              <!-- media -->
+              <div class="card-media">
+                <% if (furniture.image) { %>
+                  <img src="<%= furniture.image %>" alt="<%= furniture.name %>" />
+                <% } else { %>
+                  <img src="/images/placeholder.jpg" alt="placeholder" />
+                <% } %>
+              </div>
+
+              <!-- info -->
+              <div class="card-info">
+                <div id="f-title-<%= furniture._id %>" class="card-name"><%= furniture.name %></div>
+                <div class="card-meta">
+                  <div class="card-category">Category: <span><%= furniture.category %></span></div>
+                  <div class="card-price"><%= furniture.price %> BHD</div>
+                </div>
+                <div class="card-description"><%= furniture.description %></div>
+              </div>
+
+              <!-- actions row -->
+              <div class="card-actions">
+
+                <!-- Left side: view -->
+                <div class="action-left">
+                  <a class="btn-ghost" href="/furnitures/<%= furniture._id %>">View</a>
+                </div>
+
+                <!-- Right side: edit / delete / add to board -->
+                <div class="action-right">
+
+                  <!-- Edit link -->
+                  <a class="btn-edit" href="/furnitures/<%= furniture._id %>/edit" aria-label="Edit <%= furniture.name %>">Edit</a>
+
+                  <!-- Delete form (method-override query param) -->
+                  <form class="delete-form" action="/furnitures/<%= furniture._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this furniture? This cannot be undone.')">
+                    <button type="submit" class="btn-delete" aria-label="Delete <%= furniture.name %>">Delete</button>
+                  </form>
+
+                </div>
+
+              </div>
+
+            </div>
+            <!-- end single card -->
+
+          <% }) %>
+        </div>
+      </div>
+
+      <!-- add new button below the grid -->
+      <div class="add-new-wrap">
+        <a class="btn-primary large" href="/furnitures/new">Add new furniture</a>
+      </div>
+
     <% } %>
-    <h4>Category: <%=furniture.category %></h4>
-    <h4><%=furniture.price %> BHD</h4>
-    <h4><%=furniture.description %></h4>
-     <a href="/furnitures/<%= furniture._id %>/edit">Edit Furniture</a>
 
-     <form
-            action="/furnitures/<%= furniture._id %>?_method=DELETE"
-            method="POST"
-          >
-            <button type="submit">Delete Furniture</button>
-          </form>
-      <% }) %>
-      <a href="/furnitures/new">Add new furniture</a>
+  </div>
 
+  <!-- Optional tiny script: stop accidental double-submits on delete -->
+  <script>
+    document.addEventListener('submit', function(e){
+      if (e.target && e.target.classList.contains('delete-form')) {
+        const btn = e.target.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.innerText = 'Deleting...'; }
+      }
+    }, true);
+  </script>
     </body>
 </html>

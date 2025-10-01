@@ -1,30 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Furniture</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Furniture</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-      <%- include('../partials/_navbar.ejs') %>
-<h1>Edit <%=furniture.name %></h1>
-<form action="/furnitures/<%= furniture._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name"  value="<%= furniture.name %>"/>
-     <label for="description">Description:</label>
-    <textarea type="text" name="description" id="description" rows="4" ><%= furniture.description %></textarea>
-     <label for="category">Category:</label>
-    <input type="text" name="category" id="category" value="<%= furniture.category %>"/>
-    <label for="price">Price:</label>
-    <input type="number" name="price" id="price" min="0" value="<%= furniture.price %>"/>
-    <% if (furniture.image) { %>
-    <p>Current image:</p>
-    <img src="<%= furniture.image %>" style="max-width:200px;"><br>
-  <% } %>
+  <%- include('../partials/_navbar.ejs') %>
 
-  <label for="image">Change image: </label>
-  <input type="file" name="image" accept="image/*" />
-  <button type="submit">Update Furniture</button>
-</form>
+  <div class="furniture-show">
+
+    <!-- Page header -->
+    <div class="page-head">
+      <div class="page-title">Edit Furniture</div>
+      <div class="page-sub">Update your design — change details or replace the image</div>
+    </div>
+
+    <div class="edit-card">
+      <div class="edit-content">
+
+        <!-- Form fields -->
+        <div class="input-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" value="<%= furniture.name %>" />
+        </div>
+
+        <div class="input-group">
+          <label for="description">Description:</label>
+          <textarea name="description" id="description" rows="4"><%= furniture.description %></textarea>
+        </div>
+
+        <div class="input-group">
+          <label for="category">Category:</label>
+          <input type="text" name="category" id="category" value="<%= furniture.category %>" />
+        </div>
+
+        <div class="input-group">
+          <label for="price">Price (BHD):</label>
+          <input type="number" name="price" id="price" min="0" value="<%= furniture.price %>" />
+        </div>
+
+        <% if (furniture.image) { %>
+        <div class="current-image">
+          <p>Current Image:</p>
+          <div class="img-wrapper">
+            <img src="<%= furniture.image %>" alt="<%= furniture.name %>"/>
+          </div>
+        </div>
+        <% } %>
+
+        <div class="input-group">
+          <label for="image">Change Image:</label>
+          <input type="file" name="image" accept="image/*" />
+        </div>
+
+        <div class="submit-wrap">
+          <button type="submit" class="btn-primary">Update Furniture</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </body>
 </html>

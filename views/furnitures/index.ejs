@@ -3,30 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Furniture Catalog</title>
 </head>
 <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1> Furniture Catalog </h1>
-    <h3>Discover high-quality, curated furniture pieces and save your selections to moodboards for easy planning and visualization</h3>
-   <% furnitures.forEach((furniture)=> { %>
-        <h4><%=furniture.name %></h4>
-                 <% if (furniture.image) { %>
-      <img src="<%= furniture.image %>" style="max-width:200px;">
-    <% } %>4
-    <h4><%= furniture.price %> BHD</h4>
-     <button type="submit"><a href="/furnitures/<%= furniture._id %>">View Details</a></button>
-     <form action="/moodboards/<%= userBoards[0]?._id %>/add" method="POST">
-      <!-- better: render a dropdown of user's boards -->
-      <select name="boardId">
-        <% userBoards.forEach(b => { %>
-          <option value="<%= b._id %>"><%= b.title %></option>
-        <% }) %>
-      </select>
-      <input type="hidden" name="furnitureId" value="<%= furniture._id %>">
-      <button type="submit">Add to Board</button>
-    </form>
-  <% }) %>
+  <%- include('../partials/_navbar.ejs') %>
 
+<section class="catalog-head">
+  <h1>Furniture Catalog</h1>
+  <h3>Discover high-quality, curated furniture pieces and save your selections to moodboards for easy planning and visualization</h3>
+</section>
+
+<section class="catalog-wrapper">
+  <% if (!furnitures || furnitures.length === 0) { %>
+    <div class="catalog-empty">No furniture items yet — check back later.</div>
+  <% } else { %>
+    <div class="catalog-grid">
+      <% furnitures.forEach((furniture)=> { %>
+        <article class="catalog-card" aria-labelledby="title-<%=furniture._id%>">
+          <div class="card-media">
+            <% if (furniture.image) { %>
+              <img src="<%= furniture.image %>" alt="<%= furniture.name %>" />
+            <% } else { %>
+              <img src="/images/placeholder.jpg" alt="placeholder" />
+            <% } %>
+          </div>
+
+          <div>
+            <h4 id="title-<%=furniture._id%>" class="card-title"><%= furniture.name %></h4>
+            <div class="card-price"><%= furniture.price %> BHD</div>
+          </div>
+
+          <div class="card-actions">
+            <a class="btn-ghost" href="/furnitures/<%= furniture._id %>">View Details</a>
+
+            <form class="card-add" action="/moodboards/<%= userBoards && userBoards[0] ? userBoards[0]._id : '' %>/add" method="POST">
+              <select name="boardId" aria-label="Choose moodboard">
+                <% if (userBoards && userBoards.length){ %>
+                  <% userBoards.forEach(b => { %>
+                    <option value="<%= b._id %>"><%= b.title %></option>
+                  <% }) %>
+                <% } else { %>
+                  <option value="">No boards</option>
+                <% } %>
+              </select>
+              <input type="hidden" name="furnitureId" value="<%= furniture._id %>" />
+              <button class="btn-primary" type="submit">Add to Board</button>
+            </form>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
 </body>
 </html>

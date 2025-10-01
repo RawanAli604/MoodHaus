@@ -1,16 +1,29 @@
 <nav>
-   <a href="/"> Home </a>
-   <a href="/furnitures"> Catalog </a>
-   <% if(user){ %>
-        <div>
-        <a href="/users/profile"> My Furniture </a>
-        <a href="/moodboards"> My Moodboards </a>
-        <a href="/auth/sign-out"> Sign Out </a>
-        </div>
-   <% } else { %>
-        <div>
-            <a href="/auth/sign-up">Sign Up</a>
-            <a href="/auth/sign-in">Sign in</a>
-        </div>
-  <%  } %>
+    <div class="bname">
+ <img class="icon1"src="https://i.imgur.com/gV3qqhN.png" width:20px />
+  <div class="brand">MoodHaus</div>
+  </div>
+  <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="/furnitures">Catalog</a>
+    <% if(user){ %>
+      <a href="/users/profile">My Furniture</a>
+      <a href="/moodboards">My Moodboards</a>
+      <a href="/auth/sign-out">Sign Out</a>
+    <% } else { %>
+      <a href="/auth/sign-up">Sign Up</a>
+      <a href="/auth/sign-in">Sign In</a>
+    <% } %>
+  </div>
 </nav>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.querySelector(".menu-toggle");
+    const links = document.querySelector(".links");
+
+    toggle.addEventListener("click", () => {
+      links.classList.toggle("show");
+    });
+  });
+</script>

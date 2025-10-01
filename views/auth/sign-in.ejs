@@ -14,10 +14,9 @@
 
     <div class="container">
       <div class="card">
-        <a class="login">Log In</a>
+        <a class="login">Sign in</a>
         <form action="/auth/sign-in" method="POST">
           <div class="inputBox">
-            <!-- note placeholder=" " so :placeholder-shown works -->
             <input type="text" name="username" id="username" placeholder=" " autocomplete="username" />
             <label for="username">Username</label>
           </div>
@@ -27,12 +26,11 @@
             <label for="password">Password</label>
           </div>
 
-          <button type="submit" class="button">Sign in</button>
+          <button type="submit" class="button">Submit</button>
         </form>
       </div>
     </div>
 
-    <!-- optional JS to float labels for prefilled/autofilled inputs -->
     <script>
       // Adds class to inputs with value on page load (for autofill / server prefill)
       document.addEventListener('DOMContentLoaded', () => {
