@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Edit moodboard</title>
 </head>
-<body>
+<body class="edit-moodboard-page">
       <%- include('../partials/_navbar.ejs') %>
 
-<h1>Edit Moodboard</h1>
+<div class="edit-moodboard-container">
+<h1 class="page-title">Edit Moodboard</h1>
 
-<% if (!board) { %>
-  <p>Board not found.</p>
-<% } else { %>
-  <form action="/moodboards/<%= board._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-    <div>
+  <form action="/moodboards/<%= board._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="edit-moodboard-form">
+    <div class="form-group">
       <label>Title<br>
-        <input type="text" name="title" value="<%= board.title %>" required maxlength="120">
+      <input type="text" name="title" value="<%= board.title %>" required>
       </label>
     </div>
 
-    <div>
+    <div class="form-group">
       <label>Description<br>
-        <textarea name="description" rows="4"><%= board.description || '' %></textarea>
+      <textarea name="description" rows="4"><%= board.description || '' %></textarea>
       </label>
     </div>
 
-    <div style="margin-top:8px;">
+    <div class="form-actions">
       <button type="submit">Save changes</button>
-      <a href="/moodboards/<%= board._id %>" style="margin-left:8px;">Back</a>
+      <a href="/moodboards/<%= board._id %>">Back</a>
     </div>
   </form>
-<% } %>
+  </div>
 
 </body>
 </html>

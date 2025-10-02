@@ -1450,14 +1450,14 @@ input:focus, textarea:focus {
   outline-offset: 3px;
 }
 
-.create-moodboard-page {
+.create-moodboard-page, .edit-moodboard-page {
   font-family: "Cinzel", serif;
   color: #4a3f3a;
   padding: 20px;
   margin: 60px auto;
 }
 
-.create-moodboard-page .page-title {
+.create-moodboard-page .page-title, .edit-moodboard-page .page-title{
   font-family: "Cinzel Decorative", serif;
   font-size: clamp(26px, 3.4vw, 38px);
   color: #a19288;
@@ -1466,7 +1466,7 @@ input:focus, textarea:focus {
   letter-spacing: 1.2px;
 }
 
-.create-moodboard-form {
+.create-moodboard-form, .edit-moodboard-form {
   max-width: 600px;
   margin: 0 auto;
   padding: 24px;
@@ -1479,7 +1479,7 @@ input:focus, textarea:focus {
   animation: floatIn .4s ease both;
 }
 
-.create-moodboard-form .form-group label {
+.create-moodboard-form .form-group label, .edit-moodboard-form .form-group label{
   font-family: "Montserrat", sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -1489,7 +1489,9 @@ input:focus, textarea:focus {
 }
 
 .create-moodboard-form input,
-.create-moodboard-form textarea {
+.create-moodboard-form textarea,
+.edit-moodboard-form input,
+.edit-moodboard-form textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid rgba(60,48,42,0.15);
@@ -1501,13 +1503,15 @@ input:focus, textarea:focus {
 }
 
 .create-moodboard-form input:focus,
-.create-moodboard-form textarea:focus {
+.create-moodboard-form textarea:focus,
+.edit-moodboard-form input:focus,
+.edit-moodboard-form textarea:focus {
   border-color: #d7cac1;
   outline: none;
   box-shadow: 0 0 0 3px rgba(215,202,193,0.3);
 }
 
-.create-moodboard-form .form-actions {
+.create-moodboard-form .form-actions, .edit-moodboard-form .form-actions {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -1515,7 +1519,7 @@ input:focus, textarea:focus {
   margin-top: 10px;
 }
 
-.create-moodboard-form button {
+.create-moodboard-form button, .edit-moodboard-form button {
   background: linear-gradient(180deg, rgba(215,202,193,0.95), rgba(250,229,214,0.9));
   color: #3b2f2a;
   font-weight: 700;
@@ -1525,12 +1529,12 @@ input:focus, textarea:focus {
   transition: transform .18s ease, box-shadow .18s ease;
 }
 
-.create-moodboard-form button:hover {
+.create-moodboard-form button:hover, .edit-moodboard-form button:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 28px rgba(16,12,10,0.12);
 }
 
-.create-moodboard-form a {
+.create-moodboard-form a, .edit-moodboard-form a {
   color: #3b2f2a;
   font-size: 13px;
   font-family: "Montserrat", sans-serif;
@@ -1542,7 +1546,7 @@ input:focus, textarea:focus {
   transition: background .2s ease, transform .18s ease;
 }
 
-.create-moodboard-form a:hover {
+.create-moodboard-form a:hover, .edit-moodboard-form a:hover {
 transform: translateY(-3px);
   box-shadow: 0 12px 28px rgba(16,12,10,0.12);
 }
@@ -1554,4 +1558,13 @@ transform: translateY(-3px);
   .create-moodboard-form .form-actions { flex-direction: column; align-items: stretch; }
   .create-moodboard-form a, 
   .create-moodboard-form button[type="submit"] { width: 100%; text-align: center; }
+}
+
+@media (max-width: 640px) {
+  .edit-moodboard-page {margin: 60px auto;}
+  .edit-moodboard-form { padding: 18px; }
+  .edit-moodboard-page .page-title { font-size: 24px; }
+  .edit-moodboard-form .form-actions { flex-direction: column; align-items: stretch; }
+  .edit-moodboard-form a, 
+  .edit-moodboard-form button[type="submit"] { width: 100%; text-align: center; }
 }
