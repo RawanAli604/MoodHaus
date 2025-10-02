@@ -13,13 +13,11 @@
   <div class="furniture-show">
 
 
-    <!-- Page header (div-only) -->
     <div class="page-head">
       <div class="page-title">My Furniture</div>
       <div class="page-sub">Manage your posted pieces — edit details, remove items, or add new designs</div>
     </div>
 
-    <!-- If no furniture -->
     <% if (!myFurniture || myFurniture.length === 0) { %>
       <div class="empty-state">
         <div class="empty-title">No furniture yet</div>
@@ -30,15 +28,12 @@
       </div>
     <% } else { %>
 
-      <!-- Grid of cards -->
       <div class="myfurniture-wrapper">
         <div class="furniture-grid">
           <% myFurniture.forEach(function(furniture){ %>
 
-            <!-- single card -->
             <div class="furniture-card" aria-labelledby="f-title-<%= furniture._id %>">
 
-              <!-- media -->
               <div class="card-media">
                 <% if (furniture.image) { %>
                   <img src="<%= furniture.image %>" alt="<%= furniture.name %>" />
@@ -47,7 +42,6 @@
                 <% } %>
               </div>
 
-              <!-- info -->
               <div class="card-info">
                 <div id="f-title-<%= furniture._id %>" class="card-name"><%= furniture.name %></div>
                 <div class="card-meta">
@@ -57,21 +51,16 @@
                 <div class="card-description"><%= furniture.description %></div>
               </div>
 
-              <!-- actions row -->
               <div class="card-actions">
 
-                <!-- Left side: view -->
                 <div class="action-left">
                   <a class="btn-ghost" href="/furnitures/<%= furniture._id %>">View</a>
                 </div>
 
-                <!-- Right side: edit / delete / add to board -->
                 <div class="action-right">
 
-                  <!-- Edit link -->
                   <a class="btn-edit" href="/furnitures/<%= furniture._id %>/edit" aria-label="Edit <%= furniture.name %>">Edit</a>
 
-                  <!-- Delete form (method-override query param) -->
                   <form class="delete-form" action="/furnitures/<%= furniture._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this furniture? This cannot be undone.')">
                     <button type="submit" class="btn-delete" aria-label="Delete <%= furniture.name %>">Delete</button>
                   </form>
@@ -81,13 +70,11 @@
               </div>
 
             </div>
-            <!-- end single card -->
 
           <% }) %>
         </div>
       </div>
 
-      <!-- add new button below the grid -->
       <div class="add-new-wrap">
         <a class="btn-primary large" href="/furnitures/new">Add new furniture</a>
       </div>
@@ -96,7 +83,6 @@
 
   </div>
 
-  <!-- Optional tiny script: stop accidental double-submits on delete -->
   <script>
     document.addEventListener('submit', function(e){
       if (e.target && e.target.classList.contains('delete-form')) {

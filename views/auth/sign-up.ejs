@@ -16,33 +16,26 @@
       <div class="card2">
         <a class="logup">Sign Up</a>
     <form action="/auth/sign-up" method="POST">
-           <div class="inputBox">
+          <div class="inputBox">
       <input type="text" name="username" id="username" placeholder=" " autocomplete="username" />
       <label for="username">Username</label>
-                </div>
+          </div>
           <div class="inputBox">
       <input type="password" name="password" id="password" placeholder=" " autocomplete="new-password" />
       <label for="password">Password</label>
           </div>
-                <div class="inputBox">
+          <div class="inputBox">
       <input type="password" name="confirmPassword" id="confirmPassword" placeholder=" " autocomplete="new-password"/>
       <label for="confirmPassword">Confirm Password</label>
-                </div>
-      <button type="submit" class="button">Create Account</button>
+          </div>
+    <button type="submit" class="button">Create Account</button>
     </form>
   </div>
   </div>
     <script>
-      // Adds class to inputs with value on page load (for autofill / server prefill)
-      document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.inputBox input').forEach(inp => {
           if (inp.value.trim() !== '') inp.classList.add('has-value');
-          // For browsers that don't style :placeholder-shown on autofill,
-          // toggle a class that triggers the same CSS behaviour:
-          inp.addEventListener('input', () => {
-            if (inp.value.trim() !== '') inp.classList.add('has-value');
-            else inp.classList.remove('has-value');
-          });
         });
       });
     </script>

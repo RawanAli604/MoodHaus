@@ -814,6 +814,7 @@ body {
 .page-title {
   font-family: "Cinzel Decorative", serif;
   font-size: clamp(32px, 4vw, 48px);
+  font-weight: bold;
   color: #a19288;
   letter-spacing: 1.5px;
   margin-bottom: 6px;
@@ -1292,3 +1293,157 @@ input:focus, textarea:focus {
   .btn-primary, .btn-ghost { width:100%; }
 }
 
+.moodboards-page {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 20px;
+  font-family: "Cinzel", serif;
+  color: #4a3f3a;
+}
+
+.moodboards-head { text-align: center; margin-bottom: 18px; }
+.moodboards-title h1 {
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(28px, 3.6vw, 40px);
+  color: #a19288;
+  margin-bottom: 8px;
+  letter-spacing: 1.4px;
+}
+.moodboards-sub h3 {
+  font-family: "Cinzel", serif;
+  font-weight: 400;
+  color: #5a4b45;
+  font-size: clamp(14px, 1.3vw, 16px);
+  line-height: 1.5;
+  max-width: 900px;
+  margin: 0 auto 12px auto;
+}
+
+.create-link { margin-top: 10px; }
+.create-link .btn-primary {
+  background: linear-gradient(180deg, rgba(215,202,193,0.95), rgba(250,229,214,0.85));
+  color: #3b2f2a;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.create-link .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(16,12,10,0.08); }
+
+.moodboards-empty {
+  background: rgba(255,255,255,0.8);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(16,12,10,0.06);
+  color: #5a4b45;
+  text-align: center;
+}
+
+.moodboards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.moodboard-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.82));
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 12px 28px rgba(16,12,10,0.06);
+  transition: transform .18s ease, box-shadow .18s ease;
+  position: relative;
+  overflow: visible;
+}
+
+.moodboard-card:nth-child(odd) { transform: rotate(-0.6deg); }
+.moodboard-card:nth-child(even) { transform: rotate(0.6deg); }
+
+.moodboard-card:hover {
+  transform: rotate(0deg) translateY(-8px);
+  box-shadow: 0 22px 46px rgba(16,12,10,0.09);
+}
+
+.card-main { display:flex; flex-direction:column; gap:12px; }
+
+.card-name h3 {
+  font-family: "Cinzel", serif;
+  font-size: clamp(16px, 1.8vw, 20px);
+  color: #3c2f2a;
+  margin: 0;
+  letter-spacing: .6px;
+}
+.card-desc p {
+  margin: 6px 0 0 0;
+  color: #5a4b45;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.card-actions {
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(60,48,42,0.06);
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #5a4b45;
+  font-weight: 600;
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+
+.btn-ghost:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(16,12,10,0.06); }
+
+.action-right { display:flex; gap:8px; align-items:center; }
+
+.btn-edit {
+  background: rgba(250,229,214,0.9);
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: #3b2f2a;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform .14s ease;
+}
+
+.btn-edit:hover { transform: translateY(-2px); }
+
+.delete-form { display:inline-block; margin:0; }
+
+.btn-delete {
+  background: rgba(235,90,70,0.9);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn-delete:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(16,12,10,0.06); }
+
+.moodboard-card a { color: inherit; text-decoration: none; }
+
+@media (max-width: 900px) {
+  .moodboards-page { padding: 16px; margin: 90px auto; }
+  .moodboard-card { padding: 14px; }
+  .card-name h3 { font-size: 18px; }
+  .card-desc p { font-size: 14px; }
+  .card-actions { flex-direction: column; gap: 8px; align-items: stretch; }
+  .action-left {margin-bottom: 10px;}
+  .action-right { justify-content: flex-start; }
+}
+
+.moodboard-card :is(button, a, input):focus {
+  outline: 3px solid rgba(250,229,214,0.28);
+  outline-offset: 3px;
+}
