@@ -1,25 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add new furniture</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Add New Furniture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-      <%- include('../partials/_navbar.ejs') %>
-<h1>New Furniture</h1>
-<form action="/furnitures" method="POST" enctype="multipart/form-data">
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" required/>
-     <label for="description">Description:</label>
-    <textarea type="text" name="description" id="description" rows="4"></textarea>
-     <label for="category">Category:</label>
-    <input type="text" name="category" id="category" required/>
-    <label for="price">Price:</label>
-    <input type="number" name="price" id="price" min="0" required/>
-     <label for="image">Image:</label>
-    <input type="file" name="image" id="image" accept="image/*" required/>
-    <button type="submit">Add Furniture</button>
-</form>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <div class="add-wrapper">
+
+    <div class="add-head">
+    <div class="add-title">Add New Furniture</div>
+    <div class="add-sub">Share a piece — add a name, description, price and an image</div>
+    </div>
+
+    <div class="add-card">
+
+      <form action="/furnitures" method="POST" enctype="multipart/form-data" class="add-form">
+
+        <div class="form-grid">
+
+        <div class="form-col col-left">
+
+        <div class="input-group">
+              <div class="label" for="name">Name</div>
+              <input type="text" name="name" id="name" required />
+        </div>
+
+        <div class="input-group">
+              <div class="label" for="category">Category</div>
+              <input type="text" name="category" id="category" required />
+        </div>
+
+        <div class="input-group">
+              <div class="label" for="price">Price (BHD)</div>
+              <input type="number" name="price" id="price" min="0" required />
+        </div>
+
+        </div> 
+
+        <div class="form-col col-right">
+
+        <div class="input-group">
+              <div class="label" for="description">Description</div>
+              <textarea name="description" id="description" rows="6"></textarea>
+        </div>
+
+        <div class="input-group file-group">
+              <div class="label" for="image">Image</div>
+
+        <div class="file-card">
+                  <label class="file-visual" for="image">
+                  <div class="file-placeholder">
+                    <div class="camera-ico">📷</div>
+                    <div class="file-text">Click to choose an image</div>
+                    <div class="file-sub">Square images work best</div>
+                  </div>
+                  </label>
+                  <input type="file" name="image" id="image" accept="image/*" required />
+                  </div>
+    </div>
+
+          </div> 
+
+        </div> 
+
+        <div class="actions-row">
+          <button type="submit" class="btn-primary">Add Furniture</button>
+          <a href="/furnitures" class="btn-ghost">Cancel</a>
+        </div>
+
+      </form>
+    </div> 
+
+  </div> 
+
 </body>
 </html>
