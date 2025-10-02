@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Create a New Moodboard</title>
 </head>
-<body>
+<body class="create-moodboard-page">
       <%- include('../partials/_navbar.ejs') %>
 
-<h1>Create a New Moodboard</h1>
+<h1 class="page-title">Create a New Moodboard</h1>
 
-<form action="/moodboards" method="POST">
-  <div>
+<form action="/moodboards" method="POST" class="create-moodboard-form">
+  <div class="form-group">
     <label>Title<br>
-      <input type="text" name="title" required maxlength="120" placeholder="e.g. Cozy Living Room">
+      <input type="text" name="title" required >
     </label>
   </div>
 
-  <div>
-    <label>Description (optional)<br>
-      <textarea name="description" rows="4" cols="40" placeholder="Short description"></textarea>
+  <div class="form-group">
+    <label>Description <br>
+      <textarea name="description" rows="4" cols="40" placeholder="Short description (optional)"></textarea>
     </label>
   </div>
 
-  <div style="margin-top:8px;">
+  <div class="form-actions">
     <button type="submit">Create Moodboard</button>
-    <a href="/moodboards" style="margin-left:8px;">Cancel</a>
+    <a href="/moodboards">Cancel</a>
   </div>
 </form>
 

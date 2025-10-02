@@ -1149,7 +1149,8 @@ body {
 
 .add-wrapper {
   max-width: 1000px;
-  margin: 60px auto;
+  margin: 20px auto;
+  font-weight: bold;
   padding: 20px;
   box-sizing: border-box;
   font-family: "Cinzel", serif;
@@ -1158,6 +1159,7 @@ body {
 
 .add-head {
   text-align: center;
+  margin:60px auto;
   margin-bottom: 18px;
   animation: fadeUp .45s ease both;
 }
@@ -1446,4 +1448,110 @@ input:focus, textarea:focus {
 .moodboard-card :is(button, a, input):focus {
   outline: 3px solid rgba(250,229,214,0.28);
   outline-offset: 3px;
+}
+
+.create-moodboard-page {
+  font-family: "Cinzel", serif;
+  color: #4a3f3a;
+  padding: 20px;
+  margin: 60px auto;
+}
+
+.create-moodboard-page .page-title {
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(26px, 3.4vw, 38px);
+  color: #a19288;
+  text-align: center;
+  margin: 40px auto 24px auto;
+  letter-spacing: 1.2px;
+}
+
+.create-moodboard-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.3),rgba(142, 129, 118, 0.51));
+  border-radius: 16px;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: floatIn .4s ease both;
+}
+
+.create-moodboard-form .form-group label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3c2f2a;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.create-moodboard-form input,
+.create-moodboard-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(60,48,42,0.15);
+  border-radius: 12px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  background: rgba(255,255,255,0.95);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.create-moodboard-form input:focus,
+.create-moodboard-form textarea:focus {
+  border-color: #d7cac1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(215,202,193,0.3);
+}
+
+.create-moodboard-form .form-actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.create-moodboard-form button {
+  background: linear-gradient(180deg, rgba(215,202,193,0.95), rgba(250,229,214,0.9));
+  color: #3b2f2a;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.create-moodboard-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(16,12,10,0.12);
+}
+
+.create-moodboard-form a {
+  color: #3b2f2a;
+  font-size: 13px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  text-decoration: none; /*//this will remove the link line */
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(215,202,193,0.95), rgba(250,229,214,0.9));
+  transition: background .2s ease, transform .18s ease;
+}
+
+.create-moodboard-form a:hover {
+transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(16,12,10,0.12);
+}
+
+@media (max-width: 640px) {
+  .create-moodboard-page {margin: 60px auto;}
+  .create-moodboard-form { padding: 18px; }
+  .create-moodboard-page .page-title { font-size: 24px; }
+  .create-moodboard-form .form-actions { flex-direction: column; align-items: stretch; }
+  .create-moodboard-form a, 
+  .create-moodboard-form button[type="submit"] { width: 100%; text-align: center; }
 }
