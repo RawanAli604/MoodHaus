@@ -8,10 +8,9 @@
     <title>My Furniture</title>
 </head>
 <body>
+
      <%- include('../partials/_navbar.ejs') %>
-
-  <div class="furniture-show">
-
+     <div class="furniture-show">
 
     <div class="page-head">
       <div class="page-title">My Furniture</div>
@@ -82,14 +81,5 @@
     <% } %>
 
   </div>
-
-  <script>
-    document.addEventListener('submit', function(e){
-      if (e.target && e.target.classList.contains('delete-form')) {
-        const btn = e.target.querySelector('button[type="submit"]');
-        if (btn) { btn.disabled = true; btn.innerText = 'Deleting...'; }
-      }
-    }, true);
-  </script>
     </body>
 </html>

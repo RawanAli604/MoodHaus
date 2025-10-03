@@ -5,7 +5,27 @@
     --overlay-dark: rgba(18,18,20,0.55); 
     --overlay-left: rgba(34,34,34,0.0); 
     --content-left-padding: 64px; 
+    --shadow: 0 12px 28px rgba(0,0,0,0.06);
+    --radius:14px;
+    --bg-1: #96928a;          
+    --bg-2: #585655;         
+    --accent-strong: #FAE5D6; 
+    --accent-muted: #EDE2D6;  
+    --card-bg: rgba(255,255,255,0.05);
+    --card-border: rgba(250,229,214,0.38);
+    --glass-shadow: 0 10px 30px rgba(14,12,10,0.08);
+    --focus-glow: rgba(250,229,214,0.26);
+    --text-dark: #242222;
 } 
+  
+body{
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color: var(--muted-text);
+  height:100%;
+  width: 100%;
+  background-size: cover;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+}
 
 @keyframes floatIn {
   from { opacity:0; transform: translateY(8px) scale(.995); }
@@ -21,14 +41,7 @@
     margin:0;
     padding:0
 }
- html,body{
-    height:100%
-}
- body{ 
-    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
-    color:var(--white-faded); 
-    background: #111; 
-} 
+
 .first{ 
     height:100vh; 
     width:100%; 
@@ -243,7 +256,8 @@ main{
             padding:10px 14px; 
             background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.02)); 
             box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
-            z-index:999; } 
+            z-index:999; 
+        } 
         .authorized h1{
             margin-left: -18%;
             }
@@ -259,33 +273,19 @@ main{
             margin-left: -20px;
         }
     }
-:root{
-  --bg-1: #96928a;          
-  --bg-2: #585655;         
-  --accent-strong: #FAE5D6; 
-  --accent-muted: #EDE2D6;  
-  --card-bg: rgba(255,255,255,0.05);
-  --card-border: rgba(250,229,214,0.38);
-  --glass-shadow: 0 10px 30px rgba(14,12,10,0.08);
-  --focus-glow: rgba(250,229,214,0.26);
-  --text-dark: #242222;
-  --radius: 18px;
-}
 
-html,body{height:100%}
 .signin, .signup {
   font-family: "Cinzel", serif;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
   color:var(--text-dark);
   background:
-    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
   min-height:100vh;
   display:flex;
   flex-direction: column;
   align-items:center;
   justify-content:center;
   padding:36px;
+  animation: fadeUp .35s ease-out both;
 }
 
 .site-title{
@@ -327,7 +327,6 @@ html,body{height:100%}
   padding: clamp(20px, 3.2vw, 34px);
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(6px) saturate(120%);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
   color: var(--text-dark);
   display:block;
   color: rgba(0, 0, 0, 0.3);
@@ -342,7 +341,6 @@ html,body{height:100%}
   padding: clamp(20px, 3.2vw, 34px);
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(6px) saturate(120%);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
   color: var(--text-dark);
   display:block;
   color: rgba(0, 0, 0, 0.3);
@@ -477,7 +475,6 @@ nav {
   background: rgba(255, 255, 255, 0.15);
   border-bottom: 1px solid rgba(250,229,214,0.2);
   backdrop-filter: blur(8px) saturate(120%);
-  -webkit-backdrop-filter: blur(10px) saturate(120%);
   padding: 14px 36px;
   position:fixed;
   margin-left: -65px;
@@ -567,28 +564,18 @@ nav .menu-toggle {
   --gap: 22px;
 }
 
-body{
-  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  color: var(--muted-text);
-  height:100%;
-  width: 100%;
-  background-size: cover;
-  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  -webkit-font-smoothing:antialiased;
-}
-
 .catalog-head{
   max-width: 1200px;
-  margin: 80px 0 0 0;
+  margin: 90px 0 0 230px;
   padding: 10px 18px;
+  text-align: center;
+  animation: fadeUp .40s ease-out both;
 }
 .catalog-head h1{
-  font-family: "Cinzel Decorative", cursive;
+  font-family: "Cinzel Decorative";
   font-weight: 550;
   color:#beb0a3;
-  font-size: clamp(28px, 3.6vw, 42px);
+  font-size: clamp(28px, 3.6vw, 44px);
   letter-spacing: 1.6px;
   margin-bottom: 6px;
 }
@@ -681,7 +668,7 @@ body{
   background: transparent;
   color: var(--muted-text);
   border:1px solid rgba(60,48,42,0.08);
-  margin-top: 50px;
+  margin-top: 60px;
 }
 .btn-primary{
   background: linear-gradient(180deg, rgba(215, 202, 193, 0.95), rgba(250,229,214,0.85));
@@ -715,12 +702,15 @@ body{
 }
 @media (max-width:820px){
   .catalog-grid{ grid-template-columns: repeat(2, 1fr); }
-  .catalog-head{ padding: 8px 14px; }
+  .catalog-head{ padding: 8px 14px; text-align: center; margin: 90px auto;}
+  .card-actions .btn-primary {
+    margin-top: -2px;
+  }
 }
 @media (max-width:480px){
   .catalog-grid{ grid-template-columns: 1fr; gap:16px; }
   .card-media{ aspect-ratio: 16/9; }
-  .card-actions{ flex-direction:column; align-items:stretch; gap:8px; }
+  .card-actions{ flex-direction:column; align-items:stretch; gap:10px; }
   .card-add{ flex-direction:column; align-items:stretch; }
 }
 
@@ -744,17 +734,14 @@ body{
   --radius:14px;
 }
 
-body {
-  font-family: "Cinzel", serif;
-  background: linear-gradient(180deg, var(--bg-1), var(--bg-2));
-  color: var(--muted);
-  margin: 0;
-}
-
 .furniture-show {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding:60px 20px;
+  font-family: "Cinzel", serif;
+  color: #4a3f3a;
+  padding: 20px;
+  margin: 80px auto;
+  height:100vh;
+  background-size: cover;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
 }
 
 .furniture-title .name {
@@ -1318,14 +1305,17 @@ input:focus, textarea:focus {
 }
 
 .moodboards-page {
-  max-width: 1200px;
-  margin: 80px auto;
-  padding: 20px;
   font-family: "Cinzel", serif;
   color: #4a3f3a;
+  padding: 20px;
+  margin: 60px auto;
+  height:100vh;
+  background-size: cover;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
 }
 
-.moodboards-head { text-align: center; margin-bottom: 18px; }
+.moodboards-head { text-align: center; margin-bottom: 18px;   animation: fadeUp .40s ease-out both;
+}
 .moodboards-title h1 {
   font-family: "Cinzel Decorative", serif;
   font-size: clamp(28px, 3.6vw, 40px);
@@ -1477,6 +1467,9 @@ input:focus, textarea:focus {
   color: #4a3f3a;
   padding: 20px;
   margin: 60px auto;
+  height:100vh;
+  background-size: cover;
+  background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
 }
 
 .create-moodboard-page .page-title, .edit-moodboard-page .page-title{
@@ -1589,13 +1582,6 @@ transform: translateY(-3px);
   .edit-moodboard-form .form-actions { flex-direction: column; align-items: stretch; }
   .edit-moodboard-form a, 
   .edit-moodboard-form button[type="submit"] { width: 100%; text-align: center; }
-}
-body.moodboard-view-page {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #FAF8F3;
-    color: #333;
-    margin: 0;
-    padding: 0;
 }
 
 /* Header */
