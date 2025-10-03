@@ -10,12 +10,12 @@
 <body class="moodboard-view-page">
   <%- include('../partials/_navbar.ejs') %>
 
- <header class="mb-header">
-  <div class="mb-head-left">
-    <h1 class="mb-title"><%= board.title %></h1>
-    <% if (board.description) { %>
-      <p class="mb-description"><%= board.description %></p>
-    <% } %>
+   <header class="mb-header">
+   <div class="mb-head-left">
+     <h1 class="mb-title"><%= board.title %></h1>
+     <% if (board.description) { %>
+     <p class="mb-description"><%= board.description %></p>
+     <% } %>
   </div>
 
   <div class="mb-head-actions">
@@ -25,56 +25,52 @@
     <div class="dropdown">
       <button class="btn-primary dropdown-btn">Add Item</button>
       <div class="dropdown-content">
-        <% if (typeof allFurnitures !== 'undefined' && Array.isArray(allFurnitures) && allFurnitures.length > 0) { %>
-          <% allFurnitures.forEach(f => { %>
-            <form action="/moodboards/<%= board._id %>/add" method="POST" class="dropdown-item">
-              <input type="hidden" name="furnitureId" value="<%= f._id %>">
-              <button type="submit"><%= f.name %> <% if(f.price){ %> - <%= f.price %> BHD <% } %></button>
-            </form>
-          <% }) %>
-        <% } else { %>
-          <p class="muted">No items in catalog. <a href="/furnitures">Browse catalog</a></p>
-        <% } %>
+      <% if (typeof allFurnitures !== 'undefined' && Array.isArray(allFurnitures) && allFurnitures.length > 0) { %>
+      <% allFurnitures.forEach(f => { %>
+      <form action="/moodboards/<%= board._id %>/add" method="POST" class="dropdown-item">
+      <input type="hidden" name="furnitureId" value="<%= f._id %>">
+      <button type="submit"><%= f.name %> <% if(f.price){ %> - <%= f.price %> BHD <% } %></button>
+      </form>
+      <% }) %>
+      <% } else { %>
+      <p class="muted">No items in catalog. <a href="/furnitures">Browse catalog</a></p>
+      <% } %>
       </div>
     </div>
   </div>
-</header>
+  </header>
 
   <main class="mb-content">
     <div class="collage">
       <% if (!board.furnitures || board.furnitures.length === 0) { %>
-        <p class="collage-empty">No items added yet. Browse the catalog to populate this board.</p>
+      <p class="collage-empty">No items added yet. Browse the catalog to populate this board.</p>
       <% } else { %>
-        <% board.furnitures.forEach((item, i) => {
+            <!-- //the algorithm to display the furniture pictures within the moodboard -->
+      <% board.furnitures.forEach((item, i) => {
           const left = (i % 6) * 14 + 2;
           const top = Math.floor(i / 6) * 14 + (i % 3) * 6;
           const r = ((i % 7) - 3) * 4;
           const s = (i % 5 === 0) ? 1.15 : (i % 4 === 0) ? 0.9 : 1;
           const z = 100 + (i % 20);
-        %>
-        <div class="polaroid" style="--left:<%= left %>%; --top:<%= top %>px; --r:<%= r %>deg; --s:<%= s %>; --z:<%= z %>;">
-          <% if (item.image) { %>
-            <img class="polaroid-img" src="<%= item.image %>" alt="<%= item.name %>">
-          <% } else { %>
-            <div class="polaroid-img placeholder">No image</div>
-          <% } %>
+      %>
+      <div class="polaroid" style="--left:<%= left %>%; --top:<%= top %>px; --r:<%= r %>deg; --s:<%= s %>; --z:<%= z %>;">
+      <img class="polaroid-img" src="<%= item.image %>" alt="<%= item.name %>">
+      <div class="polaroid-caption">
+      <div class="p-name"><%= item.name %></div>
+      <% if (item.price) { %><div class="p-price"><%= item.price %> BHD</div><% } %>
+      </div>
 
-          <div class="polaroid-caption">
-            <div class="p-name"><%= item.name %></div>
-            <% if (item.price) { %><div class="p-price"><%= item.price %> BHD</div><% } %>
-          </div>
-
-          <div class="polaroid-actions">
-            <a class="btn-small" href="/furnitures/<%= item._id %>">View</a>
-            <form action="/moodboards/<%= board._id %>/remove" method="POST" class="inline-remove">
-              <input type="hidden" name="furnitureId" value="<%= item._id %>">
-              <button class="btn-small btn-danger" type="submit">Remove</button>
-            </form>
-          </div>
-        </div>
+      <div class="polaroid-actions">
+      <a class="btn-small" href="/furnitures/<%= item._id %>">View</a>
+      <form action="/moodboards/<%= board._id %>/remove" method="POST" class="inline-remove">
+      <input type="hidden" name="furnitureId" value="<%= item._id %>">
+      <button class="btn-small btn-danger" type="submit">Remove</button>
+      </form>
+      </div>
+      </div>
         <% }) %>
       <% } %>
     </div>
   </main>
-</body>
-</html>
+  </body>
+  </html>
