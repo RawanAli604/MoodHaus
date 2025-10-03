@@ -1,34 +1,24 @@
-// controllers/moodBoard.js
 const express = require('express');
 const router = express.Router();
 const MoodBoard = require('../models/moodBoard');
 const Furniture = require('../models/furniture');
-const isSignedIn = require('../middleware/is-signed-in');
 
-// Helper: ensure owner
-function ensureOwner(board, userId) {
-  return board.owner && board.owner.toString() === userId.toString();
-}
-
-// INDEX - list user's boards
-router.get('/', isSignedIn, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const ownerId = req.session.user._id;
-    const boards = await MoodBoard.find({ owner: ownerId }).sort('-createdAt');
-    res.render('moodBoard/index.ejs', { boards });
-  } catch (err) {
-    console.error('Moodboards index error:', err);
+    const populatedBoards = await MoodBoard.find({ owner: ownerId });
+    res.render('moodBoard/index.ejs', { boards: populatedBoards });
+  } catch (error) {
+    console.log(error);
     res.redirect('/');
   }
 });
 
-// NEW - form
-router.get('/new', isSignedIn, (req, res) => {
+router.get('/new', (req, res) => {
   res.render('moodBoard/new.ejs');
 });
 
-// CREATE
-router.post('/', isSignedIn, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const ownerId = req.session.user._id;
     await MoodBoard.create({
@@ -38,135 +28,104 @@ router.post('/', isSignedIn, async (req, res) => {
       furnitures: []
     });
     res.redirect('/moodboards');
-  } catch (err) {
-    console.error('Create moodboard error:', err);
-    res.redirect('/moodboards');
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
   }
 });
 
-// SHOW - populated furnitures, also pass allFurnitures for select
-router.get('/:id', isSignedIn, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const board = await MoodBoard.findById(req.params.id).populate('furnitures');
-    if (!board) return res.status(404).redirect('/moodboards');
-
-    // Authorization: only owner can view their boards (optional: allow others to view)
-    if (!ensureOwner(board, req.session.user._id)) {
-      return res.status(403).send('Forbidden');
-    }
-
-    // For the "Add an item" select: fetch catalog items (light fields only)
+    const currentBoard = await MoodBoard.findById(req.params.id).populate('furnitures');
+    // this is for displaying the dropdown menu in the show page
     const allFurnitures = await Furniture.find({}).select('name price image');
-
-    res.render('moodBoard/show.ejs', { board, allFurnitures });
-  } catch (err) {
-    console.error('Show moodboard error:', err);
-    res.redirect('/moodboards');
+    res.render('moodBoard/show.ejs', { board: currentBoard, allFurnitures });
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
   }
 });
 
-// EDIT - form
-router.get('/:id/edit', isSignedIn, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
-    const board = await MoodBoard.findById(req.params.id);
-    if (!board) return res.status(404).redirect('/moodboards');
+    const currentBoard = await MoodBoard.findById(req.params.id);
 
-    if (!ensureOwner(board, req.session.user._id)) {
-      return res.status(403).send('Forbidden');
+    if (currentBoard.owner.equals(req.session.user._id)) {
+      await MoodBoard.deleteOne({ _id: req.params.id });
+      res.redirect('/moodboards');
+    } else {
+      res.send(`Permission denied, you're not authorized to do that!`);
     }
-
-    res.render('moodBoard/edit.ejs', { board });
-  } catch (err) {
-    console.error('Edit moodboard error:', err);
-    res.redirect('/moodboards');
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
   }
 });
 
-// UPDATE
-router.put('/:id', isSignedIn, async (req, res) => {
+router.get('/:id/edit', async (req, res) => {
   try {
-    const board = await MoodBoard.findById(req.params.id);
-    if (!board) return res.status(404).redirect('/moodboards');
-
-    if (!ensureOwner(board, req.session.user._id)) {
-      return res.status(403).send('Forbidden');
+    const currentBoard = await MoodBoard.findById(req.params.id);
+    if (currentBoard.owner.equals(req.session.user._id)) {
+        res.render('moodBoard/edit.ejs', { board: currentBoard });
+    } else {
+        res.send(`Permission denied, you're not authorized to edit this board!`);
     }
-
-    board.title = req.body.title || board.title;
-    board.description = req.body.description || board.description;
-    await board.save();
-
-    res.redirect(`/moodboards/${board._id}`);
-  } catch (err) {
-    console.error('Update moodboard error:', err);
-    res.redirect('/moodboards');
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
   }
 });
 
-// ADD furniture to board (prevents duplicates)
-router.post('/:id/add', isSignedIn, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
-    const board = await MoodBoard.findById(req.params.id);
-    if (!board) return res.status(404).redirect('/moodboards');
-
-    if (!ensureOwner(board, req.session.user._id)) {
-      return res.status(403).send('Forbidden');
+    const currentBoard = await MoodBoard.findById(req.params.id);
+    if (currentBoard.owner.equals(req.session.user._id)) {
+    currentBoard.title = req.body.title;
+    currentBoard.description = req.body.description;
+    await currentBoard.save();
+    res.redirect(`/moodboards/${currentBoard._id}`);    } 
+    else {
+     res.send(`You don't have permession to do that.`);
     }
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
 
-    const furnitureId = req.body.furnitureId || req.body.furnitureIdSelect || req.body.furniture; // flexible
-    if (!furnitureId) return res.redirect(`/moodboards/${board._id}`);
+//add furniture
+router.post('/:id/add', async (req, res) => {
+  try {
+    const currentBoard = await MoodBoard.findById(req.params.id);
+    const furnitureId = req.body.furnitureId || req.body.furnitureIdSelect || req.body.furniture;
 
     // prevent duplicates
-    if (!board.furnitures.map(String).includes(String(furnitureId))) {
-      board.furnitures.push(furnitureId);
-      await board.save();
+    if (!currentBoard.furnitures.map(String).includes(String(furnitureId))) {
+      currentBoard.furnitures.push(furnitureId);
+      await currentBoard.save();
     }
-
-    res.redirect(`/moodboards/${board._id}`);
-  } catch (err) {
-    console.error('Add to moodboard error:', err);
-    res.redirect('/moodboards');
+    res.redirect(`/moodboards/${currentBoard._id}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
   }
 });
 
-// REMOVE furniture from board
-router.post('/:id/remove', isSignedIn, async (req, res) => {
+//remove furniture
+router.post('/:id/remove', async (req, res) => {
   try {
-    const board = await MoodBoard.findById(req.params.id);
-    if (!board) return res.status(404).redirect('/moodboards');
-
-    if (!ensureOwner(board, req.session.user._id)) {
-      return res.status(403).send('Forbidden');
-    }
-
+    const currentBoard = await MoodBoard.findById(req.params.id);
     const furnitureId = req.body.furnitureId;
-    board.furnitures = board.furnitures.filter(fid => fid.toString() !== furnitureId.toString());
-    await board.save();
 
-    res.redirect(`/moodboards/${board._id}`);
-  } catch (err) {
-    console.error('Remove from moodboard error:', err);
-    res.redirect('/moodboards');
+    currentBoard.furnitures = currentBoard.furnitures.filter(fid => fid.toString() !== furnitureId.toString());
+    await currentBoard.save();
+
+    res.redirect(`/moodboards/${currentBoard._id}`);
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
   }
 });
 
-// DELETE board
-router.delete('/:id', isSignedIn, async (req, res) => {
-  try {
-    const board = await MoodBoard.findById(req.params.id);
-    if (!board) return res.status(404).redirect('/moodboards');
-
-    if (!ensureOwner(board, req.session.user._id)) {
-      return res.status(403).send('Forbidden');
-    }
-
-    await MoodBoard.deleteOne({ _id: req.params.id });
-    res.redirect('/moodboards');
-  } catch (err) {
-    console.error('Delete moodboard error:', err);
-    res.redirect('/moodboards');
-  }
-});
 
 module.exports = router;
-

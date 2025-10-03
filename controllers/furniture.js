@@ -3,7 +3,7 @@ const router = express.Router();
 const upload = require('../middleware/upload'); 
 
 const Furniture = require('../models/furniture');
-const MoodBoard = require('../models/moodBoard'); // import the model
+const MoodBoard = require('../models/moodBoard'); 
 
 router.get('/', async (req, res) => {
     try{
