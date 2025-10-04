@@ -1,96 +1,40 @@
-# MEN Stack Starter Template with Session Authentication
 
-Welcome to the MEN Stack Starter Template! This template provides a foundational setup for building web applications using MongoDB, Express.js, and Node.js, complete with session authentication. This is ideal for students looking to kickstart their development projects.
+MoodHaus 🏛️
 
-## Table of Contents
-- [Prerequisites](#prerequisites)
-- [Clone the Repository](#clone-the-repository)
-- [Installation](#installation)
-- [Environment Setup](#environment-setup)
-- [Running the Application](#running-the-application)
-- [Removing Git and Creating Your Own Repo](#removing-git-and-creating-your-own-repo)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+ **Website discription :** MoodHaus is a web application for pre-interior design planning.  
+Users can browse furniture pieces in a shared **furniture catalog** created by all users, or add new furniture if it’s not available. They can then insert selected furniture pieces into their **personal moodboards** on their profile to visualize how items will look together. This makes it easier to plan, experiment with styles, and organize interior design ideas before making real-life decisions.  
 
-## Prerequisites
+→ The goal behind building this application was not only to support interior design enthusiasts but also to empower everyday users to explore design possibilities in an accessible way. It combines the practicality of a furniture catalog with the creativity of mood board building, bridging the gap between inspiration and planning.
 
-Before you begin, ensure you have the following installed on your machine:
-- [Node.js](https://nodejs.org/) (LTS or later)
-- [MongoDB](https://www.mongodb.com/) (make sure it's running)
-- [Git](https://git-scm.com/) (for cloning the repository)
+**⌂ website front-page :**
+ 
+<img width="1915" height="909" alt="Screenshot 2025-10-03 225716" src="https://github.com/user-attachments/assets/239e3395-054d-4ea7-9970-3e89c0ceb540" />
 
-## Clone the Repository
 
-To clone this repository, open your terminal and run:
+**⌂ website logo :**
 
-```bash
-git clone https://github.com/SEB-PT-6-Solutions/men-stack-session-auth-template.git YOUR_APP_NAME_HERE
-```
+<img width="290" height="250" alt="Screenshot 2025-09-28 215154" src="https://github.com/user-attachments/assets/4468eb8c-8c6b-47c5-8f77-2d3e55cd1140" />
 
-## Installation
-Navigate into the cloned directory:
-```bash
-cd YOUR_APP_NAME
-```
+ **⩥ Deployed link :** 
 
-Then, install the necessary dependencies:
+**❓wireframes & homepage planning :** 
 
-```bash
-npm i
-```
+https://www.canva.com/design/DAG0SRPHUGQ/YttJfGBdzbMyxNjkrGQdNQ/view?utm_content=DAG0SRPHUGQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50c4aa5bb3
 
-## Environment Setup
-```plaintext
-MONGODB_URI=atlas_db_uri
-SESSION_SECRET=your_secret_key
-```
-Replace `atlas_db_uri` with your desired database name and `your_secret_key` with a secure key.
+**attributes :** 
+- Fonts: [Google Fonts – Cinzel, Montserrat](https://fonts.google.com/)  
+- icon and images: [Imgur](https://imgur.com/), [design](https://www.design.com/s/logo-maker?code=25OFFSEM&utm_medium=cpc&utm_source=google&utm_campaign=middleeast_generic_logo_ai_max&utm_adgroup=logos&utm_content=769431353649&utm_keyword=logo+maker&utm_network=g&gad_source=1&gad_campaignid=20838923223&gbraid=0AAAAADwF9LAgpAlpqq-GILjKrZIIHXQ_q&gclid=CjwKCAjwuePGBhBZEiwAIGCVS0kBy7sjGvCZeo14NKUrj8xLglqJFuDwvmKLSUHGCe6AFUy1y8LBoBoChooQAvD_BwE)
 
-## Removing Git and Creating Your Own Repo
-To remove the existing Git history and create your own repository:
+**technologies :**
+- Frontend: HTML, CSS, JavaScript, EJS Templates  
+- Backend: Node.js
+- Database: MongoDB (mongoose)
+- Middleware: Multer for file uploads
 
-1. Remove the existing .git folder:
-  ```bash
-  rm -rf .git
-  ```
-2. Initialize a new Git repository:
-  ```bash
-  git init
-  ```
-3. Add all files to the new repository:
-  ```bash
-  git add .
-  ```
-4. Commit the changes
-   ```bash
-   git commit -m "Initial commit"
-   ``` 
-5. Create a new repository on GitHub (or any other platform) and follow the instructions to push your local repository.
-  Make a new repository on [GitHub](https://github.com/) named `<your-project-name>`
-  Now link your local project to your remote GitHub repo:
-  ```bash
-  git remote add origin https://github.com/<github-username>/YOUR_APP_NAME.git
-  git push origin main
-  ```
+**Next Steps :**
+- Drag and drop moodboard arrangement
+- A 3D moodboard space and furniture peices
+- Ability to resize and rotate furnitures within the 3D moodboard
+- Multiuser moodboards for people designing together
 
-> 🚨 Do not copy the above command. It will not work. Your GitHub username will replace `<github-username>` (including the `<` and `>`) in the URL above.
-
-## Running the application
-```bash
-npm run dev
-```
-
-## Features
-- User registration and login with session management
-- Basic CRUD operations
-- Modular file structure
-- Example routes and controllers
-- Basic user model setup
-- Middleware for templates and authorization
-- Basic authentication flow
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-Happy Coding!
+  
